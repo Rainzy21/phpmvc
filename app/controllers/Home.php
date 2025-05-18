@@ -4,7 +4,10 @@
 
 class Home extends Controller {
     public function index() {
-        // Load the home view
+        
+        $data['title'] = 'Utama';
+        $this->view('templates/header', $data);
         $this->view('home/index');
+        $this->view('templates/footer');
     }
 }
