@@ -1,10 +1,10 @@
 <?php
 // Ini untuk controller admin dashboard
-class Dashboard extends Controller {
+class Console extends Controller {
     public function index() {
-        $data['title'] = 'Dashboard';
+        $data['title'] = 'Manajemen Konsol';
         $this->view('templates/admin_header', $data);
-        $this->view('admin/dashboard/index');
+        $this->view('admin/console/index');
         $this->view('templates/admin_footer');
     }
 }
