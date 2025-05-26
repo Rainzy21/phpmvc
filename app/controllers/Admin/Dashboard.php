@@ -2,7 +2,6 @@
 // Ini untuk controller admin dashboard
 class Dashboard extends Controller {
     public function index() {
-        // Tidak perlu session_start() di sini
 
         // Cek autentikasi admin
         if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {

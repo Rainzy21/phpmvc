@@ -25,7 +25,7 @@ class Console extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'name' => $_POST['consoleName'],
-                'brand' => $_POST['consoleCategory'],
+                'brand' => $_POST['consoleBrand'], // Ganti 'consoleCategory' menjadi 'consoleBrand' sesuai field di form
                 'description' => '', // tambahkan jika ada field deskripsi di form
                 'price_per_day' => $_POST['consolePrice'],
                 'stock' => $_POST['consoleStock'],
@@ -56,7 +56,7 @@ class Console extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'name' => $_POST['consoleName'],
-                'brand' => $_POST['consoleCategory'],
+                'brand' => $_POST['consoleBrand'], 
                 'description' => '', // tambahkan jika ada field deskripsi di form
                 'price_per_day' => $_POST['consolePrice'],
                 // Jika stok tidak boleh diubah saat edit, hapus baris di bawah

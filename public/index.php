@@ -9,3 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once '../app/init.php';
 
 $app = new App();
+
+
+//**Tujuannya:**  
+// Agar fitur session (seperti login, menyimpan data user, dsb) bisa digunakan di seluruh aplikasi tanpa error "session already started" atau "headers already sent".

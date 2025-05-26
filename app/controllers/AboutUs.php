@@ -2,13 +2,13 @@
 // This controller handles the home page
 // It extends the base Controller class
 
-class Home extends Controller {
+class AboutUs extends Controller {
     public function index() {
         
-        $data['title'] = 'Halaman Pertama';
-        $data['active_menu'] = 'home';
+        $data['title'] = 'Halaman Tentang Kami';
+        $data['active_menu'] = 'aboutus';
         $this->view('templates/header', $data);
-        $this->view('home/index');
+        $this->view('aboutus/index');
         $this->view('templates/footer');
     }
 }

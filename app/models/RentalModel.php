@@ -7,6 +7,8 @@ class RentalModel
     {
         // Asumsi ada Database wrapper di project-mu
         $this->db = new Database;
+        
+
     }
 
     // Tambah data rental (ke tabel rentals)

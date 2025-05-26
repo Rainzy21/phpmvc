@@ -29,7 +29,7 @@
         </div>
         
         <div class="footer-bottom">
-            &copy; 2024 Rentbox. All rights reserved.
+            &copy; 2025 Rentbox. All rights reserved.
         </div>
 </footer>
     <script src="<?= BASE_URL; ?>/js/script.js"></script>

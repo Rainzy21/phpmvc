@@ -13,7 +13,7 @@
         <th>ID</th>
         <th>Gambar</th>
         <th>Nama Konsol</th>
-        <th>Kategori</th>
+        <th>Brand</th>
         <th>Stok</th>
         <th>Harga Sewa (Rp)</th>
         <th>Aksi</th> <!-- Tambah kolom aksi -->
@@ -60,8 +60,8 @@
     <input type="hidden" name="consoleId" id="consoleId" />
     <label for="consoleName">Nama Konsol</label>
     <input type="text" name="consoleName" id="consoleName" placeholder="Masukkan nama konsol" required />
-    <label for="consoleCategory">Kategori</label>
-    <input type="text" name="consoleCategory" id="consoleCategory" placeholder="Masukkan kategori konsol" required />
+    <label for="consoleBrand">Brand</label>
+    <input type="text" name="consoleBrand" id="consoleBrand" placeholder="Masukkan Brand konsol" required />
     <div id="stockGroup">
       <label for="consoleStock">Stok</label>
       <input type="number" name="consoleStock" id="consoleStock" min="0" placeholder="Masukkan jumlah stok" required />

@@ -1,7 +1,7 @@
 <main>
     <div class="catalog-container">
         <div class="catalog-heading">
-            <h1>Temukan konsol favoritmu dan mulai petualangan seru!</h1>
+            <h1>Petualangan menarik berawal dari konsol yang berkualitas!</h1>
             <p>Cek ketersediaan – stok bisa berubah kapan saja.</p>
         </div>
         <section class="catalog-products">
