@@ -90,21 +90,19 @@
                 text-align: center;
                 margin-bottom: 15px;
             }
-            .create-an-account, p {
-                text-align: center;
-                margin-top: 15px;
+            .register-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #ffffff;
             }
 
-            p {
-                color: #ffffff;
-            }
-            
-            .create-an-account a {
+            .register-link a {
                 color: #f3ca20;
+                text-decoration: none;
+                font-size: 14px;
             }
 
-            .create-an-account a:hover {
-                color: #947a14;
+            .register-link a:hover {
                 text-decoration: underline;
             }
     </style>
@@ -112,20 +110,15 @@
 <body>
   <div class="login-container">
         <h2>Login</h2>
-        
-        <?php if (isset($_GET['error'])): ?>
-            <p class="error-message">Invalid username or password!</p>
-        <?php endif; ?>
-
-        <form action="login.php" method="POST">
+        <form action="<?= BASE_URL; ?>/auth/login" method="POST">
             <div class="form-group">
-                <label for="username">ID</label>
-                <input type="text" id="username" name="username" required placeholder="Masukkin Admin ID">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" required placeholder="Masukkan Email">
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required placeholder="Masukkin Password">
+                <input type="password" id="password" name="password" required placeholder="Masukkan Password">
             </div>
 
             <div class="form-group">
@@ -136,8 +129,8 @@
         <div class="forgot-password">
             <a href="forgot-password.php">Forgot Password?</a>
         </div>
-        <div class="create-an-account">
-            <p>Belum punya akun? <a href="register.php">Daftar Sekarang</a></p>
+        <div class="register-link">
+            Belum punya akun? <a href="<?= BASE_URL; ?>/auth/register">Daftar</a>
         </div>
     </div>
 </body>

@@ -1,16 +1,17 @@
-      <h1>Dashboard</h1>
+<?php if (isset($data)) extract($data); ?>
+<h1>Dashboard</h1>
       <section class="cards">
         <div class="card">
           <div class="info">
             <span class="title">Total Users</span>
-            <span class="value">1,245</span>
+            <span class="value"><?= isset($totalUsers) ? $totalUsers : '' ?></span>
           </div>
           <div class="icon"><i class="fas fa-users"></i></div>
         </div>
         <div class="card">
           <div class="info">
             <span class="title">Total Konsol</span>
-            <span class="value">342</span>
+            <span class="value"><?= isset($totalKonsol) ? $totalKonsol : '' ?></span>
           </div>
           <div class="icon"><i class="fas fa-gamepad"></i></div>
         </div>

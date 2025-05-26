@@ -33,7 +33,10 @@ class App {
         }
 
         // Method
-        if (isset($url[1]) && method_exists($this->controller, $url[1])) {
+        if (isset($url[2]) && method_exists($this->controller, $url[2])) {
+            $this->method = $url[2];
+            unset($url[2]);
+        } elseif (isset($url[1]) && method_exists($this->controller, $url[1])) {
             $this->method = $url[1];
             unset($url[1]);
         }

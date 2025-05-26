@@ -1,7 +1,13 @@
-const sidebar = document.getElementById('sidebar');
-const menuToggle = document.getElementById('menuToggle');
-menuToggle.addEventListener('click', () => {
-  sidebar.classList.toggle('collapsed');
-  // adjust ARIA or other accessibility features if needed
+
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    hamburger.addEventListener('click', function() {
+        mobileMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    });
 });
+
+
 

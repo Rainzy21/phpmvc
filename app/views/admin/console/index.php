@@ -1,63 +1,78 @@
-      <h1>Manajemen Konsol</h1>
-            <nav class="tabs" aria-label="Manajemen Konsol navigation">
-            <div class="tab active" data-tab="lihat">Lihat semua konsol</div>
-            <div class="tab" data-tab="tambah">Tambah / Edit / Hapus konsol</div>
-            <div class="tab" data-tab="stok">Stok dan harga sewa</div>
-            </nav>
+<h1>Manajemen Konsol</h1>
+<div class="tabs">
+  <div class="tab active" data-tab="view">Lihat Semua Konsol</div>
+  <div class="tab" data-tab="manage">Tambah/Edit Konsol</div>
+</div>
 
-            <section id="lihat" class="active" aria-label="Lihat semua konsol">
-                <table aria-describedby="lihat-desc">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama Konsol</th>
-                            <th>Stok</th>
-                            <th>Harga Sewa (Rp)</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="console-list">
-                    <!-- Console rows are dynamically added -->
-                    </tbody>
-                </table>
-                <p id="lihat-desc" class="sr-only">Daftar semua konsol yang tersedia di sistem.</p>
-            </section>
+<!-- Tab content sections -->
 
-            <section id="tambah" aria-label="Tambah, edit, dan hapus konsol">
-                <form id="console-form" aria-describedby="form-desc">
-                    <h2 id="form-title">Tambah Konsol Baru</h2>
-                    <p id="form-desc" class="sr-only">
-                    Formulir untuk menambah atau mengubah data konsol.
-                    </p>
-                    <input type="hidden" id="console-id" />
-                    <label for="console-name">Nama Konsol</label>
-                    <input type="text" id="console-name" placeholder="Masukkan nama konsol" required />
-                    <label for="console-stock">Stok</label>
-                    <input type="number" id="console-stock" min="0" placeholder="Masukkan jumlah stok" required />
-                    <label for="console-price">Harga Sewa (Rp)</label>
-                    <input type="number" id="console-price" min="0" step="1000" placeholder="Masukkan harga sewa" required />
-                    <label for="console-image">Gambar Konsol (opsional)</label>
-                    <input type="file" id="console-image" accept="image/*" />
-                    <img id="image-preview" class="img-preview" src="" alt="Preview gambar konsol" style="display:none;" />
-                    <button type="submit" class="submit-btn">Simpan</button>
-                    <button type="button" id="cancel-edit-btn" style="display:none;">Batal</button>
-                </form>
-            </section>
+<section id="view" class="tab-content active">
+  <table id="consoleTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Gambar</th>
+        <th>Nama Konsol</th>
+        <th>Kategori</th>
+        <th>Stok</th>
+        <th>Harga Sewa (Rp)</th>
+        <th>Aksi</th> <!-- Tambah kolom aksi -->
+      </tr>
+    </thead>
+    <tbody>
+      <?php if (isset($consoles) && is_array($consoles) && count($consoles) > 0): ?>
+        <?php foreach ($consoles as $console): ?>
+          <tr>
+            <td><?= htmlspecialchars($console['id']) ?></td>
+            <td>
+              <?php if (!empty($console['image'])): ?>
+                <img src="<?= BASE_URL . '/' . htmlspecialchars($console['image']) ?>" alt="Gambar Konsol" style="width:60px; height:auto;">
+              <?php else: ?>
+                <img src="<?= BASE_URL ?>/assets/img/no-image.png" alt="No Image" style="width:60px; height:auto;">
+              <?php endif; ?>
+            </td>
+            <td><?= htmlspecialchars($console['name']) ?></td>
+            <td><?= htmlspecialchars($console['brand']) ?></td>
+            <td><?= htmlspecialchars($console['stock']) ?></td>
+            <td><?= htmlspecialchars(number_format($console['price_per_day'], 0, ',', '.')) ?></td>
+            <td>
+              <form action="<?= BASE_URL ?>/admin/console/update/<?= $console['id'] ?>" method="get" style="display:inline;">
+                <button type="submit" class="btn-edit">Edit</button>
+              </form>
+              <form action="<?= BASE_URL ?>/admin/console/delete/<?= $console['id'] ?>" method="post" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus konsol ini?')">
+                <button type="submit" class="btn-delete">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <tr>
+          <td colspan="7" style="text-align:center;">Tidak ada data konsol.</td>
+        </tr>
+      <?php endif; ?>
+    </tbody>
+  </table>
+  <p class="message" id="viewMessage"></p>
+</section>
 
-            <section id="stok" aria-label="Stok dan harga sewa">
-                <h2>Stok dan Harga Sewa Konsol</h2>
-                <table aria-describedby="stok-desc">
-                    <thead>
-                        <tr>
-                            <th>Nama Konsol</th>
-                            <th>Stok Tersedia</th>
-                            <th>Harga Sewa (Rp)</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="stock-price-list">
-                        <!-- Rows dynamically generated -->
-                    </tbody>
-                </table>
-                <p id="stok-desc" class="sr-only">Edit stok dan harga sewa konsol yang ada.</p>
-            </section>
+<section id="manage" class="tab-content" style="display:none;">
+  <form id="consoleForm" method="POST" action="<?= BASE_URL ?>/admin/console/add" enctype="multipart/form-data" novalidate>
+    <input type="hidden" name="consoleId" id="consoleId" />
+    <label for="consoleName">Nama Konsol</label>
+    <input type="text" name="consoleName" id="consoleName" placeholder="Masukkan nama konsol" required />
+    <label for="consoleCategory">Kategori</label>
+    <input type="text" name="consoleCategory" id="consoleCategory" placeholder="Masukkan kategori konsol" required />
+    <div id="stockGroup">
+      <label for="consoleStock">Stok</label>
+      <input type="number" name="consoleStock" id="consoleStock" min="0" placeholder="Masukkan jumlah stok" required />
+    </div>
+    <label for="consolePrice">Harga Sewa (Rp)</label>
+    <input type="number" name="consolePrice" id="consolePrice" min="0" placeholder="Masukkan harga sewa" required />
+    <label for="consoleImage">Gambar Konsol</label>
+    <input type="file" name="consoleImage" id="consoleImage" accept="image/*" />
+    <img src="" alt="Preview Gambar Konsol" id="imagePreview" class="img-preview" style="display:none;" />
+    <button type="submit" id="saveConsoleBtn">Tambah Konsol</button>
+    <button type="button" id="cancelEditBtn" style="display:none; margin-left:10px;">Batal Edit</button>
+  </form>
+  <p class="message" id="manageMessage"></p>
+</section>

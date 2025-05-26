@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up Form</title>
+    <title><?= $data['title']; ?></title>
     <style>
         * {
             margin: 0;
@@ -105,12 +105,11 @@
 <body>
     <div class="signup-container">
         <h2>Create a New Account</h2>
-        <form action="#" method="POST">
+        <form action="<?= BASE_URL; ?>/auth/register" method="POST">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+                <label for="name">Nama Lengkap</label>
+                <input type="text" id="name" name="name" required>
             </div>
-            
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
@@ -129,7 +128,7 @@
             <button type="submit">Sign Up</button>
         </form>
         <div class="login-link">
-            Already have an account? <a href="#">Log in</a>
+            Sudah punya Akun? <a href="<?= BASE_URL; ?>/auth/login">Log in</a>
         </div>
     </div>
 </body>

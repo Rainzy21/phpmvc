@@ -5,6 +5,10 @@
             --light: #F9F9F9;
         }
 
+        html {
+            overflow-y: scroll;
+        }
+
         * {
             padding: 0;
             box-sizing: border-box;
@@ -18,14 +22,16 @@
             display: flex;
             flex-direction: column;
             line-height: 1.6;
+            margin: 0;
+            padding: 0;
         }
 
+        /* Container wrapper */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-            flex: 1;
-            margin-top: 50px;
+            padding: 80px 20px 0 20px; /* padding-top 80px untuk menghindari navbar fixed */
+            box-sizing: border-box;
         }
 
         .hero {
@@ -106,16 +112,24 @@
             font-family: 'Arial', sans-serif;
         }
 
+        html, body {
+            overflow-x: hidden;
+        }         
+
+        /* Navbar utama */
         nav {
             background-color: #3f3f3f;
-            padding: 10px 20px;
+            padding: 1rem 2rem;      /* Top/Bottom: 16px, Left/Right: 32px */
+            margin-bottom: 2rem;     /* Jarak dari elemen di bawahnya */
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            transition: 0.3s all;
+            width: 100%;
             z-index: 1000;
+            box-sizing: border-box;
+            transition: 0.3s all;
         }
 
         .nav-container {
@@ -130,13 +144,15 @@
         /* Nav Links */
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 0; /* gap diatur lewat margin pada li */
             list-style: none;
             transition: all 0.3s ease;
         }
 
         .nav-links li {
             position: relative;
+            padding: 0.75rem 1.5rem; /* Internal spacing item */
+            margin: 0 1rem;          /* Spacing antar item */
         }
 
         .nav-links a {
@@ -246,6 +262,31 @@
         .nav-links a.active::after {
             background-color: #f3ca20; /* Should match the text color */
             width: 100% !important;
+        }
+
+        .logout {
+            background-color: #ff0000;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            padding: 8px 25px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .logout:hover {
+            background-color: #ff0000;
+            color: rgb(0, 0, 0);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .halo-text {
+            color: #ffffff;
+            margin-right: 4px;
+        }
+
+        .auth-buttons .user-name {
+            color: #f3ca20 !important;
         }
 
         /* For mobile menu */
@@ -570,4 +611,375 @@
                 font-size: 2em;
             }
         }
-        
+
+        /* Catalog */
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 2rem 1rem 2rem 1rem;
+            gap: 1.5rem;
+            margin-top: 0; /* Hapus margin-top agar tidak dobel dengan .container */
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            padding: 1rem;
+            transition: transform 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+            max-height: 180px;
+        }
+
+        @media (max-width: 900px) {
+            .catalog-products {
+                gap: 1rem;
+            }
+            .catalog-card {
+                width: 90vw;
+                max-width: 350px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .catalog-products {
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+            }
+            .catalog-card {
+                width: 100%;
+                max-width: 100%;
+            }
+            .catalog-card img {
+                max-height: 180px;
+                object-fit: cover;
+            }
+            .catalog-title {
+                font-size: 1.2rem;
+            }
+            .catalog-price {
+                font-size: 0.95rem;
+            }
+            .btn-catalog {
+                width: 100%;
+                font-size: 1rem;
+                padding: 0.7rem 0;
+            }
+        }
+
+        /* Cara Sewa */
+        /* style.css - Tambahkan di bawah CSS global project-mu */
+
+/* Container khusus halaman Cara Sewa */
+.carasewa-container {
+  border-radius: 15px;
+  max-width: 960px;
+  width: 100%;
+  padding: 9rem 1.5rem 4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.carasewa-container header {
+  text-align: center;
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
+
+.carasewa-container header h1 {
+  font-weight: 700;
+  font-size: 2.75rem;
+  letter-spacing: 1.2px;
+  margin-bottom: 0.5rem;
+}
+
+.carasewa-container header p {
+  font-size: 1.2rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+.carasewa-container ol {
+  list-style: none;
+  counter-reset: step-counter;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem 2rem;
+  padding-left: 0;
+  margin: 0;
+}
+
+.carasewa-container ol li {
+  background: rgba(255, 255, 255, 0.17);
+  border-radius: 14px;
+  padding: 2rem 1.5rem 2rem 1.5rem;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: background 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 180px;
+}
+
+.carasewa-container ol li:hover {
+  background: rgba(255, 255, 255, 0.27);
+  box-shadow: 0 6px 20px rgba(33, 199, 255, 0.4);
+}
+
+.carasewa-container ol li::before {
+  counter-increment: step-counter;
+  content: counter(step-counter);
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  background: #21c7ff;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  color: white;
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  user-select: none;
+}
+
+.carasewa-container ol li h3 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #21c7ff;
+}
+
+.carasewa-container ol li p {
+  font-size: 1rem;
+  color: #222;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.carasewa-container .cta {
+  margin-top: 4.2rem;
+  width: 100%;
+  text-align: center;
+}
+
+.carasewa-container .cta button {
+  background: #21c7ff;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  color: #0b273b;
+  font-weight: 700;
+  border-radius: 50px;
+  box-shadow: 0 5px 18px rgba(33, 199, 255, 0.7);
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  max-width: 320px;
+  width: 100%;
+  user-select: none;
+}
+
+.carasewa-container .cta button:hover,
+.carasewa-container .cta button:focus {
+  background: #0b273b;
+  color: #21c7ff;
+  box-shadow: 0 7px 24px rgba(33, 199, 255, 0.9);
+  outline: none;
+}
+
+.btn-sewa {
+  display: inline-block;
+  background: #6c5ce7;
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+.btn-sewa:hover {
+  background: #5848c2;
+}
+
+@media (max-width: 700px) {
+  .carasewa-container {
+    margin-top: 5rem;
+    padding: 2.5rem 1.5rem 3rem;
+  }
+  .carasewa-container ol {
+    grid-template-columns: 1fr;
+    gap: 1.5rem 0;
+  }
+  .carasewa-container ol li {
+    min-height: auto;
+    padding: 1.5rem 1.5rem 1.5rem 3.5rem;
+  }
+  .carasewa-container ol li::before {
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    font-size: 1.1rem;
+  }
+  .carasewa-container header h1 {
+    font-size: 2rem;
+  }
+  .carasewa-container header p {
+    font-size: 1rem;
+  }
+  .carasewa-container .cta button {
+    max-width: 100%;
+    font-size: 1.1rem;
+  }
+}
+
+/* Tambahkan ini untuk mengatur tampilan pada catalog */
+/* Katalog Konsol */
+.catalog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 9rem 1.5rem 4rem 1.5rem;
+}
+
+.catalog-heading {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.catalog-heading h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.catalog-heading p {
+    font-size: 1.1rem;
+    color: #636e72;
+}
+
+.catalog-products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.catalog-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.catalog-card:hover {
+    transform: translateY(-5px);
+}
+
+.catalog-img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    max-height: 180px;
+}
+
+.catalog-title {
+    margin: 1rem 0 0.5rem;
+    color: #2c3e50;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.catalog-price {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #0984e3;
+}
+
+.catalog-status {
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 0.2rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.catalog-status.available {
+    background: #dff9fb;
+    color: #00b894;
+}
+
+.btn-catalog {
+    background: #27ae60;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.btn-catalog:hover {
+    background: #219150;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .catalog-products {
+        gap: 1rem;
+    }
+    .catalog-card {
+        width: 90vw;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 600px) {
+    .catalog-products {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+    }
+    .catalog-card {
+        width: 100%;
+        max-width: 100%;
+    }
+    .catalog-img {
+        max-height: 140px;
+    }
+    .catalog-title {
+        font-size: 1.1rem;
+    }
+    .catalog-price {
+        font-size: 0.95rem;
+    }
+    .btn-catalog {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.7rem 0;
+    }
+}

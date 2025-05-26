@@ -1,298 +1,109 @@
-        </main>
+</main>
      </div>
     <script>
-        const sidebar = document.getElementById('sidebar');
-        const menuToggle = document.getElementById('menuToggle');
-        menuToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('collapsed');
-        // adjust ARIA or other accessibility features if needed
-        });
+      // Script untuk toggle menu navigasi
+      const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  const mainContent = document.getElementById('mainContent');
 
-        // Manajemen Konsol
-    // Data store for demo purposes
-    let consoles = [
-      { id: 1, name: "PlayStation 5", stock: 10, price: 150000, image: "" },
-      { id: 2, name: "Xbox Series X", stock: 8, price: 140000, image: "" },
-      { id: 3, name: "Nintendo Switch", stock: 15, price: 120000, image: "" }
-    ];
+  // Baca status collapse dari localStorage saat halaman dimuat
+  if (localStorage.getItem('sidebar-collapsed') === 'true') {
+    sidebar.classList.add('collapsed');
+    mainContent.classList.add('sidebar-collapsed');
+  }
 
-    const tabs = document.querySelectorAll(".tab");
-    const sections = document.querySelectorAll("section");
+  menuToggle.addEventListener('click', function() {
+    sidebar.classList.toggle('collapsed');
+    mainContent.classList.toggle('sidebar-collapsed');
+    // Simpan status collapse ke localStorage
+    localStorage.setItem('sidebar-collapsed', sidebar.classList.contains('collapsed'));
+  });
 
-    // Switch tabs
-    tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        const target = tab.dataset.tab;
-        // Set active tab and section
-        tabs.forEach(t => t.classList.remove("active"));
-        sections.forEach(s => s.classList.remove("active"));
-        tab.classList.add("active");
-        document.getElementById(target).classList.add("active");
 
-        if(target === "tambah"){
-          resetForm();
-        }
-        if(target === "stok"){
-          renderStockPriceList();
-        }
-        if(target === "lihat"){
-          renderConsoleList();
-        }
-      });
-    });
+// Script untuk Manajemen Konsol
+document.addEventListener('DOMContentLoaded', function () {
+  const tabs = document.querySelectorAll('.tab');
+  const tabContents = document.querySelectorAll('.tab-content');
+  const stockInput = document.getElementById('consoleStock');
 
-    const consoleListBody = document.getElementById("console-list");
-    const stockPriceBody = document.getElementById("stock-price-list");
-    const imageInput = document.getElementById("console-image");
-    const imagePreview = document.getElementById("image-preview");
-
-    // Render "Lihat Semua Konsol"
-    function renderConsoleList() {
-      consoleListBody.innerHTML = "";
-      if(consoles.length === 0){
-        consoleListBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:1rem;">Tidak ada data konsol.</td></tr>';
-        return;
-      }
-      consoles.forEach(c => {
-        const tr = document.createElement("tr");
-
-        const imgHTML = c.image
-          ? `<img class="thumb-img" src="${c.image}" alt="Gambar ${c.name}" />`
-          : '<div style="width:50px; height:35px; background:#ddd; border-radius:4px; display:inline-block; margin-right:0.5rem; vertical-align:middle;"></div>';
-
-        tr.innerHTML = `
-          <td>${c.id}</td>
-          <td><div class="name-with-img">${imgHTML}<span>${c.name}</span></div></td>
-          <td>${c.stock}</td>
-          <td>Rp ${c.price.toLocaleString("id-ID")}</td>
-          <td>
-            <button class="action-btn edit-btn" data-id="${c.id}">Edit</button>
-            <button class="action-btn delete-btn" data-id="${c.id}">Hapus</button>
-          </td>
-        `;
-        consoleListBody.appendChild(tr);
-      });
-      addTableListeners();
+  // Fungsi untuk set mode form
+  window.setFormMode = function(isEdit) {
+    if (stockInput) {
+      stockInput.readOnly = !!isEdit;
+      if (!isEdit) stockInput.value = '';
     }
+  };
 
-    // Add listeners for edit and delete buttons in table
-    function addTableListeners() {
-      document.querySelectorAll(".edit-btn").forEach(btn => {
-        btn.onclick = () => {
-          const id = parseInt(btn.dataset.id);
-          editConsole(id);
-          // switch tab to tambah
-          tabs.forEach(t => t.classList.remove("active"));
-          sections.forEach(s => s.classList.remove("active"));
-          document.querySelector('.tab[data-tab="tambah"]').classList.add("active");
-          document.getElementById("tambah").classList.add("active");
-        };
-      });
-      document.querySelectorAll(".delete-btn").forEach(btn => {
-        btn.onclick = () => {
-          const id = parseInt(btn.dataset.id);
-          if(confirm("Yakin ingin menghapus konsol ini?")){
-            deleteConsole(id);
-          }
-        };
-      });
-    }
-
-    // Delete console by id
-    function deleteConsole(id) {
-      consoles = consoles.filter(c => c.id !== id);
-      renderConsoleList();
-      renderStockPriceList();
-    }
-
-    // Edit console function (populate form)
-    function editConsole(id) {
-      const c = consoles.find(c => c.id === id);
-      if(!c) return;
-      document.getElementById("form-title").textContent = "Edit Konsol";
-      document.getElementById("console-id").value = c.id;
-      document.getElementById("console-name").value = c.name;
-      document.getElementById("console-stock").value = c.stock;
-      document.getElementById("console-price").value = c.price;
-      if(c.image){
-        imagePreview.src = c.image;
-        imagePreview.style.display = "block";
-      } else {
-        imagePreview.src = "";
-        imagePreview.style.display = "none";
-      }
-      // Clear file input as setting .value to '' doesn't always work visually
-      imageInput.value = "";
-      document.getElementById("cancel-edit-btn").style.display = "inline-block";
-    }
-
-    // Reset the form to add mode
-    function resetForm() {
-      document.getElementById("form-title").textContent = "Tambah Konsol Baru";
-      document.getElementById("console-id").value = "";
-      document.getElementById("console-name").value = "";
-      document.getElementById("console-stock").value = "";
-      document.getElementById("console-price").value = "";
-      imageInput.value = "";
-      imagePreview.src = "";
-      imagePreview.style.display = "none";
-      document.getElementById("cancel-edit-btn").style.display = "none";
-    }
-
-    // Handle image input change
-    imageInput.addEventListener("change", () => {
-      const file = imageInput.files[0];
-      if(file){
-        const reader = new FileReader();
-        reader.onload = e => {
-          imagePreview.src = e.target.result;
-          imagePreview.style.display = "block";
-        };
-        reader.readAsDataURL(file);
-      } else {
-        imagePreview.src = "";
-        imagePreview.style.display = "none";
-      }
-    });
-
-    // Form submission handling
-    document.getElementById("console-form").addEventListener("submit", e => {
-      e.preventDefault();
-      const idStr = document.getElementById("console-id").value;
-      const name = document.getElementById("console-name").value.trim();
-      const stock = parseInt(document.getElementById("console-stock").value);
-      const price = parseInt(document.getElementById("console-price").value);
-
-      if(!name || isNaN(stock) || stock < 0 || isNaN(price) || price < 0){
-        alert("Harap lengkapi data dengan benar.");
-        return;
-      }
-
-      const file = imageInput.files[0];
-
-      if(idStr) {
-        // edit existing
-        const id = parseInt(idStr);
-        const idx = consoles.findIndex(c => c.id === id);
-        if(idx > -1){
-          consoles[idx].name = name;
-          consoles[idx].stock = stock;
-          consoles[idx].price = price;
-
-          if(file) {
-            const reader = new FileReader();
-            reader.onload = e => {
-              consoles[idx].image = e.target.result;
-              alert("Konsol berhasil diperbarui.");
-              resetForm();
-              renderConsoleList();
-              renderStockPriceList();
-              // switch to lihat tab
-              tabs.forEach(t => t.classList.remove("active"));
-              sections.forEach(s => s.classList.remove("active"));
-              document.querySelector('.tab[data-tab="lihat"]').classList.add("active");
-              document.getElementById("lihat").classList.add("active");
-            };
-            reader.readAsDataURL(file);
-          } else {
-            alert("Konsol berhasil diperbarui.");
-            resetForm();
-            renderConsoleList();
-            renderStockPriceList();
-            // switch to lihat tab
-            tabs.forEach(t => t.classList.remove("active"));
-            sections.forEach(s => s.classList.remove("active"));
-            document.querySelector('.tab[data-tab="lihat"]').classList.add("active");
-            document.getElementById("lihat").classList.add("active");
-          }
-        }
-      } else {
-        if(file){
-          const reader = new FileReader();
-          reader.onload = e => {
-            const newId = consoles.length > 0 ? consoles[consoles.length - 1].id + 1 : 1;
-            consoles.push({ id: newId, name, stock, price, image: e.target.result });
-            alert("Konsol baru berhasil ditambahkan.");
-            resetForm();
-            renderConsoleList();
-            renderStockPriceList();
-            // switch to lihat tab
-            tabs.forEach(t => t.classList.remove("active"));
-            sections.forEach(s => s.classList.remove("active"));
-            document.querySelector('.tab[data-tab="lihat"]').classList.add("active");
-            document.getElementById("lihat").classList.add("active");
-          };
-          reader.readAsDataURL(file);
+  // Tab switching saja
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const tabName = tab.getAttribute('data-tab');
+      tabContents.forEach(tc => {
+        if(tc.id === tabName) {
+          tc.style.display = 'block';
+          tc.classList.add('active');
         } else {
-          const newId = consoles.length > 0 ? consoles[consoles.length - 1].id + 1 : 1;
-          consoles.push({ id: newId, name, stock, price, image: "" });
-          alert("Konsol baru berhasil ditambahkan.");
-          resetForm();
-          renderConsoleList();
-          renderStockPriceList();
-          // switch to lihat tab
-          tabs.forEach(t => t.classList.remove("active"));
-          sections.forEach(s => s.classList.remove("active"));
-          document.querySelector('.tab[data-tab="lihat"]').classList.add("active");
-          document.getElementById("lihat").classList.add("active");
+          tc.style.display = 'none';
+          tc.classList.remove('active');
         }
-      }
-    });
-
-    // Cancel edit button
-    document.getElementById("cancel-edit-btn").addEventListener("click", () => {
-      resetForm();
-    });
-
-    // Render stok dan harga sewa section with inline editing
-    function renderStockPriceList(){
-      stockPriceBody.innerHTML = "";
-      if(consoles.length === 0){
-        stockPriceBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:1rem;">Tidak ada data konsol.</td></tr>';
-        return;
-      }
-      consoles.forEach(c => {
-        const tr = document.createElement("tr");
-
-        const imgHTML = c.image
-          ? `<img class="thumb-img" src="${c.image}" alt="Gambar ${c.name}" />`
-          : '<div style="width:50px; height:35px; background:#ddd; border-radius:4px; display:inline-block; margin-right:0.5rem; vertical-align:middle;"></div>';
-
-        tr.innerHTML = `
-          <td><div class="name-with-img">${imgHTML}<span>${c.name}</span></div></td>
-          <td><input type="number" min="0" value="${c.stock}" data-id="${c.id}" data-type="stock" class="stock-price-input" style="width:8rem; border-radius:4px; border:1px solid #ccc; padding:0.25rem 0.5rem;" /></td>
-          <td><input type="number" min="0" step="1000" value="${c.price}" data-id="${c.id}" data-type="price" class="stock-price-input" style="width:10rem; border-radius:4px; border:1px solid #ccc; padding:0.25rem 0.5rem;" /></td>
-          <td><button class="action-btn save-price-btn" data-id="${c.id}" style="background:#27ae60;">Simpan</button></td>
-        `;
-        stockPriceBody.appendChild(tr);
       });
+      // Jika tab tambah/edit diklik, set mode tambah (bukan edit)
+      if(tabName === 'manage') setFormMode(false);
+    });
+  });
 
-      // Add save button listeners
-      document.querySelectorAll(".save-price-btn").forEach(btn => {
-        btn.onclick = () => {
-          const id = parseInt(btn.dataset.id);
-          const stockInput = document.querySelector(`input[data-id="${id}"][data-type="stock"]`);
-          const priceInput = document.querySelector(`input[data-id="${id}"][data-type="price"]`);
-          const newStock = parseInt(stockInput.value);
-          const newPrice = parseInt(priceInput.value);
+  // Handler tombol Edit pada tabel konsol
+  document.querySelectorAll('.btn-edit').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const tr = this.closest('tr');
+      document.getElementById('consoleId').value = tr.children[0].textContent.trim();
+      document.getElementById('consoleName').value = tr.children[2].textContent.trim();
+      document.getElementById('consoleCategory').value = tr.children[3].textContent.trim();
+      document.getElementById('consolePrice').value = tr.children[5].textContent.replace(/\./g, '').replace(/,/g, '').trim();
 
-          if(isNaN(newStock) || newStock < 0 || isNaN(newPrice) || newPrice < 0){
-            alert("Stok dan harga harus angka positif.");
-            return;
-          }
-          const idx = consoles.findIndex(c => c.id === id);
-          if(idx > -1){
-            consoles[idx].stock = newStock;
-            consoles[idx].price = newPrice;
-            alert("Stok dan harga sewa berhasil diperbarui.");
-            renderConsoleList();
-          }
-        };
-      });
+      // Sembunyikan input stok saat edit
+      document.getElementById('stockGroup').style.display = 'none';
+
+      setFormMode(true);
+      document.getElementById('saveConsoleBtn').textContent = 'Simpan Perubahan';
+      document.getElementById('cancelEditBtn').style.display = 'inline-block';
+      document.getElementById('consoleForm').action = "<?= BASE_URL ?>/admin/console/update/" + tr.children[0].textContent.trim();
+      document.querySelector('.tab[data-tab="manage"]').click();
+    });
+  });
+
+  // Handler tombol batal edit
+  document.getElementById('cancelEditBtn').addEventListener('click', function() {
+    document.getElementById('consoleForm').reset();
+    document.getElementById('consoleId').value = '';
+    document.getElementById('consoleForm').action = "<?= BASE_URL ?>/admin/console/add";
+    document.getElementById('saveConsoleBtn').textContent = 'Tambah Konsol';
+    this.style.display = 'none';
+    setFormMode(false);
+
+    // Tampilkan kembali input stok saat tambah
+    document.getElementById('stockGroup').style.display = '';
+  });
+});
+
+// User Management (biarkan jika memang dipakai di halaman user)
+document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.querySelector('.search-input');
+    const userTable = document.querySelector('.user-table');
+    if (searchInput && userTable) {
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = userTable.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const email = row.children[1].textContent.toLowerCase();
+                row.style.display = email.includes(searchTerm) ? '' : 'none';
+            });
+        });
     }
-
-    // Initial rendering
-    renderConsoleList();
-    </script>
+});
+</script>
 </body>
 </html>

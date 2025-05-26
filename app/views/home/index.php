@@ -1,29 +1,29 @@
-    <main>
-        <div class="container">
-            <section class="hero">
-                <h1>Sewa Konsol Game<br><span style="color: var(--primary)">Premium</span></h1>
-                <p class="tagline">PS5, Xbox Series X, Nintendo Switch - Pilihan lengkap dengan kualitas terbaik</p>
-                <a href="#katalog" class="cta-button">Jelajahi Katalog</a>
-            </section>
+<main>
+    <div class="container">
+        <section class="hero">
+            <h1>Sewa Konsol Game<br><span style="color: var(--primary)">Premium</span></h1>
+            <p class="tagline">PS5, Xbox Series X, Nintendo Switch - Pilihan lengkap dengan kualitas terbaik</p>
+            <a href="<?= BASE_URL; ?>/Catalog" class="cta-button">Jelajahi Katalog</a>
+        </section>
 
-            <section class="features">
-                <div class="feature-card">
-                    <div class="feature-icon">🎮</div>
-                    <h3>100+ Konsol Tersedia</h3>
-                    <p>Pilihan berbagai generasi dan aksesori</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🚚</div>
-                    <h3>Pengiriman Cepat</h3>
-                    <p>Gratis ongkir seluruh Indonesia</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Garansi Aman</h3>
-                    <p>Dana kembali 100% jika ada masalah</p>
-                </div>
-            </section>
-        </div>
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3>100+ Konsol Tersedia</h3>
+                <p>Pilihan berbagai generasi dan aksesori</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚚</div>
+                <h3>Pengiriman Cepat</h3>
+                <p>Gratis ongkir seluruh Indonesia</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Garansi Aman</h3>
+                <p>Dana kembali 100% jika ada masalah</p>
+            </div>
+        </section>
+
         <section class="advantages-section">
             <div class="section-title">
                 <h2>Kenapa Memilih Kami?</h2>
@@ -74,54 +74,56 @@
                 </div>
             </div>
         </section>
+
         <section class="testimonials-section">
-        <h2 class="testimonials-title">Apa Kata Mereka</h2>
-        
-        <div class="testimonials-container">
-            <!-- Testimonial 1 -->
-            <div class="testimonial-card">
-                <span class="quote-icon">“</span>
-                <div class="user-info">
-                    <img src="https://via.placeholder.com/60" alt="User" class="user-img">
-                    <div>
-                        <div class="user-name">John Smith</div>
-                        <div class="user-role">Marketing Manager</div>
-                    </div>
-                </div>
-                <p class="testimonial-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                </p>
-            </div>
+            <h2 class="testimonials-title">Apa Kata Mereka</h2>
 
-            <!-- Testimonial 2 -->
-            <div class="testimonial-card">
-                <span class="quote-icon">“</span>
-                <div class="user-info">
-                    <img src="https://via.placeholder.com/60" alt="User" class="user-img">
-                    <div>
-                        <div class="user-name">Sarah Johnson</div>
-                        <div class="user-role">Small Business Owner</div>
+            <div class="testimonials-container">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <span class="quote-icon">“</span>
+                    <div class="user-info">
+                        <img src="https://via.placeholder.com/60" alt="User" class="user-img">
+                        <div>
+                            <div class="user-name">John Smith</div>
+                            <div class="user-role">Marketing Manager</div>
+                        </div>
                     </div>
+                    <p class="testimonial-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                    </p>
                 </div>
-                <p class="testimonial-text">
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-                </p>
-            </div>
 
-            <!-- Testimonial 3 -->
-            <div class="testimonial-card">
-                <span class="quote-icon">“</span>
-                <div class="user-info">
-                    <img src="https://via.placeholder.com/60" alt="User" class="user-img">
-                    <div>
-                        <div class="user-name">Michael Chen</div>
-                        <div class="user-role">Startup Founder</div>
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <span class="quote-icon">“</span>
+                    <div class="user-info">
+                        <img src="https://via.placeholder.com/60" alt="User" class="user-img">
+                        <div>
+                            <div class="user-name">Sarah Johnson</div>
+                            <div class="user-role">Small Business Owner</div>
+                        </div>
                     </div>
+                    <p class="testimonial-text">
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+                    </p>
                 </div>
-                <p class="testimonial-text">
-                    Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-                </p>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <span class="quote-icon">“</span>
+                    <div class="user-info">
+                        <img src="https://via.placeholder.com/60" alt="User" class="user-img">
+                        <div>
+                            <div class="user-name">Michael Chen</div>
+                            <div class="user-role">Startup Founder</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+                    </p>
+                </div>
             </div>
-        </div>
-    </section>
-    </main>
+        </section>
+    </div>
+</main>
