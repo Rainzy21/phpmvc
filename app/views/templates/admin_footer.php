@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const tr = this.closest('tr');
       document.getElementById('consoleId').value = tr.children[0].textContent.trim();
       document.getElementById('consoleName').value = tr.children[2].textContent.trim();
-      document.getElementById('consoleCategory').value = tr.children[3].textContent.trim();
+      document.getElementById('consoleBrand').value = tr.children[3].textContent.trim();
       document.getElementById('consolePrice').value = tr.children[5].textContent.replace(/\./g, '').replace(/,/g, '').trim();
 
       // Sembunyikan input stok saat edit

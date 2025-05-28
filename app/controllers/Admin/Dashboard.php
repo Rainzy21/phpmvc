@@ -20,6 +20,12 @@ class Dashboard extends Controller {
         $consoleModel = $this->model('ConsoleModel');
         $data['totalKonsol'] = $consoleModel->getTotalKonsol();
 
+        // Ambil total transaksi dari RentalModel
+        $rentalModel = $this->model('RentalModel');
+        $data['totalTransaksi'] = $rentalModel->getTotalTransaction();
+        // Ambil total pendapatan dari RentalModel
+        $data['TransaksiTerbaru'] = $rentalModel->getTheNewestRentalId();
+
         $this->view('templates/admin_header', $data);
         $this->view('admin/dashboard/index', $data);
         $this->view('templates/admin_footer');

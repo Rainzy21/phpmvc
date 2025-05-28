@@ -6,7 +6,6 @@
 <title>Form Pemesanan Konsol</title>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
     body {
         margin: 0;
         font-family: 'Montserrat', sans-serif;
@@ -72,23 +71,32 @@
         cursor: pointer;
         transition: background 0.3s ease;
         width: 100%;
+        margin-top: 1rem;
     }
     button:hover {
         background: #5848c2;
+    }
+    .error-message {
+        color: #ff7675;
+        margin-bottom: 1rem;
+        font-weight: 600;
     }
 </style>
 </head>
 <body>
 <div class="container">
     <h1>Form Pemesanan Konsol</h1>
-    <form id="orderForm" action="<?= BASE_URL ?>/rental/add" method="POST">
+    <?php if (!empty($error)): ?>
+        <div class="error-message"><?= htmlspecialchars($error) ?></div>
+    <?php endif; ?>
+    <form id="orderForm" action="<?= BASE_URL ?>/rental/add" method="POST" autocomplete="off">
         <label for="console_id">Pilih Konsol</label>
         <select id="console_id" name="console_id" required>
             <option value="" disabled selected>-- Pilih Konsol --</option>
             <?php if (isset($consoles) && is_array($consoles)): ?>
                 <?php foreach ($consoles as $console): ?>
-                    <option value="<?= $console['id'] ?>">
-                        <?= htmlspecialchars($console['name']) ?> (Stok: <?= $console['stock'] ?>)
+                    <option value="<?= $console['id'] ?>" data-stock="<?= $console['stock'] ?>">
+                        <?= htmlspecialchars($console['name']) ?>
                     </option>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -103,20 +111,83 @@
         <label for="qty">Jumlah Unit</label>
         <input type="number" id="qty" name="qty" required min="1" max="100" placeholder="Masukkan jumlah unit" />
 
+        <!-- Tambahkan ini untuk menampilkan biaya pesanan -->
+        <div id="orderCost" style="margin-bottom:1rem;font-weight:600;color:#fff;">
+            Biaya Pesanan: <span id="costValue">Rp 0</span>
+        </div>
+
+        <label for="payment_method">Metode Pembayaran</label>
+        <select id="payment_method" name="payment_method" required>
+            <option value="" disabled selected>-- Pilih Metode --</option>
+            <option value="transfer">Transfer</option>
+            <option value="cod">COD</option>
+        </select>
+
         <button type="submit">Pesan</button>
     </form>
 </div>
 
 <script>
-    // Setting min attributes of date inputs to current date for user convenience
+    // Set min tanggal hari ini
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('rent_date').setAttribute('min', today);
     document.getElementById('return_date').setAttribute('min', today);
 
-    // Optional: Set min return_date to rent_date
+    // Set min return_date ke rent_date
     document.getElementById('rent_date').addEventListener('change', function() {
         document.getElementById('return_date').setAttribute('min', this.value);
+        if (document.getElementById('return_date').value < this.value) {
+            document.getElementById('return_date').value = '';
+        }
     });
+
+    // Otomatis set max qty sesuai stok konsol yang dipilih
+    document.getElementById('console_id').addEventListener('change', function() {
+        const selected = this.options[this.selectedIndex];
+        const stock = selected.getAttribute('data-stock');
+        const qtyInput = document.getElementById('qty');
+        qtyInput.max = stock;
+        qtyInput.value = '';
+        qtyInput.placeholder = 'Ada ' + stock + ' unit tersedia';
+    });
+
+    // Ambil data harga per hari dari PHP ke JS
+    const consolePrices = {};
+    <?php if (isset($consoles) && is_array($consoles)): ?>
+        <?php foreach ($consoles as $console): ?>
+            consolePrices['<?= $console['id'] ?>'] = <?= (int)$console['price_per_day'] ?>;
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    function formatRupiah(angka) {
+        return 'Rp ' + angka.toLocaleString('id-ID');
+    }
+
+    function updateOrderCost() {
+        const consoleId = document.getElementById('console_id').value;
+        const pricePerDay = consolePrices[consoleId] || 0;
+        const qty = parseInt(document.getElementById('qty').value) || 0;
+        const rentDate = document.getElementById('rent_date').value;
+        const returnDate = document.getElementById('return_date').value;
+
+        let days = 1;
+        if (rentDate && returnDate) {
+            const start = new Date(rentDate);
+            const end = new Date(returnDate);
+            days = Math.max(1, Math.round((end - start) / 86400000));
+        }
+
+        const total = pricePerDay * qty * days;
+        document.getElementById('costValue').textContent = formatRupiah(total);
+    }
+
+    document.getElementById('console_id').addEventListener('change', updateOrderCost);
+    document.getElementById('qty').addEventListener('input', updateOrderCost);
+    document.getElementById('rent_date').addEventListener('change', updateOrderCost);
+    document.getElementById('return_date').addEventListener('change', updateOrderCost);
+
+    // Inisialisasi biaya pesanan saat halaman pertama kali dibuka
+    updateOrderCost();
 </script>
 </body>
 </html>

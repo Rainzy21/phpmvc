@@ -10,6 +10,9 @@
 <body>
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
+      <div class="menu-toggle" id="menuToggle" title="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </div>
       <i class="fas fa-user-shield"></i> <span class="sidebar-title">ADMIN</span>
     </div>
     <nav class="sidebar-menu">
@@ -21,12 +24,4 @@
     </nav>
   </aside>
   <div class="main-content" id="mainContent">
-    <header class="topbar">
-      <div class="menu-toggle" id="menuToggle" title="Toggle Menu">
-        <i class="fas fa-bars"></i>
-      </div>
-      <div class="topbar-right">
-        <div class="profile-pic" title="User Profile"></div>
-      </div>
-    </header>
     <main>

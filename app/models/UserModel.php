@@ -1,20 +1,24 @@
 <?php
+require_once __DIR__ . '/RentalModel.php';
+
 class UserModel
 {
     private $db;
+    private $rentalModel;
 
     public function __construct()
     {
         $this->db = new Database(); // gunakan class Database.php (PDO)
+        $this->rentalModel = new RentalModel();
     }
 
-    // Ambil semua user beserta total transaksi (contoh join, sesuaikan jika ada tabel transaksi)
+    // Ambil semua user beserta total transaksi
     public function getAllWithTransaksi()
     {
         $this->db->query("SELECT id, name, email, role FROM users");
         $users = $this->db->resultSet();
         foreach ($users as &$user) {
-            $user['totalTransactions'] = 0;
+            $user['totalTransactions'] = $this->rentalModel->getTotalTransactionByid($user['id']);
         }
         return $users;
     }

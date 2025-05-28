@@ -18,19 +18,18 @@
         <div class="card">
           <div class="info">
             <span class="title">Total Transaksi</span>
-            <span class="value">5,643</span>
+            <span class="value"><?= isset($totalTransaksi) ? $totalTransaksi : '' ?></span>
           </div>
           <div class="icon"><i class="fas fa-money-bill-wave"></i></div>
         </div>
         <div class="card">
           <div class="info">
             <span class="title">Transaksi Terbaru</span>
-            <span class="value">23</span>
+            <span class="value"><?= isset($TransaksiTerbaru) ? '#' . $TransaksiTerbaru : 'Belum ada transaksi' ?></span>
           </div>
           <div class="icon"><i class="fas fa-receipt"></i></div>
         </div>
       </section>
-      <section class="table-container">
         <table>
           <thead>
             <tr>
@@ -67,5 +66,4 @@
             </tr>
           </tbody>
         </table>
-      </section>
 

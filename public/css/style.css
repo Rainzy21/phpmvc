@@ -152,7 +152,7 @@
         .nav-links li {
             position: relative;
             padding: 0.75rem 1.5rem; /* Internal spacing item */
-            margin: 0 1rem;          /* Spacing antar item */
+            margin: 0;          /* Spacing antar item */
         }
 
         .nav-links a {
@@ -982,4 +982,77 @@
         font-size: 1rem;
         padding: 0.7rem 0;
     }
+}
+
+/* Untuk mengatur tampilan pada halaman pesanan user */
+.container-orders {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: flex-start; /* atau center jika ingin rata tengah */
+    align-items: flex-start;
+    margin-top: 9rem;
+    padding: 1rem 2rem;
+}
+
+.container-orders .order-card {
+    max-width: 350px;
+    width: 100%;
+    background-color: #fff;
+    margin: 0;
+    margin-bottom: 2rem;
+    padding: 1.6rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    flex: 1 1 320px;
+}
+.container-orders .order-header {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0d6efd;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #0d6efd;
+    padding-bottom: 0.3rem;
+}
+.container-orders .order-item {
+    margin-bottom: 1rem;
+}
+.container-orders .order-label {
+    font-weight: 600;
+    color: #555;
+}
+.container-orders .order-value {
+    font-size: 1.1rem;
+    margin-top: 0.25rem;
+    color: #222;
+    display: flex;
+    align-items: center;
+}
+.container-orders .status-icon {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+.container-orders .status-pending {
+    background-color: #fd7e14;
+}
+.container-orders .status-ongoing {
+    background-color: #0d6efd;
+}
+.container-orders .status-completed {
+    background-color: #28a745;
+}
+.container-orders .status-cancelled {
+    background-color: #dc3545;
+}
+.container-orders .notes {
+    background-color: #fff3cd;
+    border-left: 6px solid #ffc107;
+    padding: 1rem 1rem 1rem 1.25rem;
+    border-radius: 6px;
+    margin-top: 1.25rem;
+    color: #856404;
+    font-size: 0.95rem;
 }

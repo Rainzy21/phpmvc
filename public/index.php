@@ -2,9 +2,8 @@
 // Thuis is the entry point of the application
 // It initializes the application and loads the necessary files
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+session_start(); // Memulai session untuk aplikasi
+// Memastikan session dimulai sebelum mengakses fitur yang memerlukan session
 
 require_once '../app/init.php';
 

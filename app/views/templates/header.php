@@ -19,6 +19,9 @@ $current = $_SERVER['REQUEST_URI'];
                 <li><a href="<?= BASE_URL; ?>/Catalog" class="<?= ($data['active_menu'] ?? '') === 'catalog' ? 'active' : '' ?>">Katalog</a></li>
                 <li><a href="<?= BASE_URL; ?>/Rent" class="<?= ($data['active_menu'] ?? '') === 'rent' ? 'active' : '' ?>">Cara Sewa</a></li>
                 <li><a href="<?= BASE_URL; ?>/AboutUs" class="<?= ($data['active_menu'] ?? '') === 'aboutus' ? 'active' : '' ?>">Tentang Kami</a></li>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <li><a href="<?= BASE_URL; ?>/Orders" class="<?= ($data['active_menu'] ?? '') === 'orders' ? 'active' : '' ?>">Pesanan</a></li>
+            <?php endif; ?>
             </ul>
             
             <div class="auth-buttons">
@@ -49,9 +52,11 @@ $current = $_SERVER['REQUEST_URI'];
             <ul class="nav-links">
                 <li><a href="<?= BASE_URL; ?>/Home" class="<?= ($data['active_menu'] ?? '') === 'home' ? 'active' : '' ?>">Beranda</a></li>
                 <li><a href="<?= BASE_URL; ?>/Catalog" class="<?= ($data['active_menu'] ?? '') === 'catalog' ? 'active' : '' ?>">Katalog</a></li>
-                <li><a href="<?= BASE_URL; ?>/Rent" class="<?= ($data['active_menu'] ?? '') === 'carasewa' ? 'active' : '' ?>">Cara Sewa</a></li>
-                <li><a href="<?= BASE_URL; ?>/TentangKami" class="<?= ($data['active_menu'] ?? '') === 'tentangkami' ? 'active' : '' ?>">Tentang Kami</a></li>
-                <li><a href="#">Kontak</a></li>
+                <li><a href="<?= BASE_URL; ?>/Rent" class="<?= ($data['active_menu'] ?? '') === 'rent' ? 'active' : '' ?>">Cara Sewa</a></li>
+                <li><a href="<?= BASE_URL; ?>/AboutUs" class="<?= ($data['active_menu'] ?? '') === 'aboutus' ? 'active' : '' ?>">Tentang Kami</a></li>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <li><a href="<?= BASE_URL; ?>/Orders" class="<?= ($data['active_menu'] ?? '') === 'orders' ? 'active' : '' ?>">Pesanan</a></li>
+            <?php endif; ?>
             </ul>
             <div class="auth-buttons">
                 <?php if (isset($_SESSION['user_id'])): ?>

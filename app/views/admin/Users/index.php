@@ -1,6 +1,6 @@
 <?php if (isset($data)) extract($data); ?> 
 
-<h1>Manajemen User</h1>
+<h1>Manajemen Pengguna</h1>
 
 <?php if (isset($flash)): ?>
   <div style="background:#dff0d8;color:#3c763d;padding:10px 16px;border-radius:4px;margin-bottom:16px;">

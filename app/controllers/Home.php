@@ -7,8 +7,11 @@ class Home extends Controller {
         
         $data['title'] = 'Halaman Pertama';
         $data['active_menu'] = 'home';
+        // Ambil review dari model
+        $data['reviews'] = $this->model('ReviewsModel')->getAllReviewsWithUser();
+
         $this->view('templates/header', $data);
-        $this->view('home/index');
+        $this->view('home/index', $data);
         $this->view('templates/footer');
     }
 }

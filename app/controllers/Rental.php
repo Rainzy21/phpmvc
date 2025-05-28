@@ -5,15 +5,17 @@ class Rental extends Controller
     private $rentalModel;
     private $consoleModel;
 
+    private $OrderHelper;
+
     public function __construct()
     {
         $this->rentalModel = $this->model('RentalModel');
-        $this->consoleModel = $this->model('ConsoleModel'); // pastikan ada model ini untuk ambil data konsol
+        $this->consoleModel = $this->model('ConsoleModel');
     }
 
     // Tampilkan form rental
     public function index()
-    {
+    { 
         $data['consoles'] = $this->consoleModel->getAllConsoles();
         $this->view('rental/index', $data);
     }
@@ -22,50 +24,72 @@ class Rental extends Controller
     public function add()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Ambil data dari form
+            // Validasi input sederhana
+            if (
+                empty($_POST['console_id']) ||
+                empty($_POST['rent_date']) ||
+                empty($_POST['return_date']) ||
+                empty($_POST['qty']) ||
+                empty($_POST['payment_method'])
+            ) {
+                echo "Semua field harus diisi!";
+                return;
+            }
+
+            // CEK SESSION USER DI SINI
+            var_dump($_SESSION['user']); // Debug: cek isi session user
+
+            if (!isset($_SESSION['user_id'])) {
+                echo "Anda harus login untuk melakukan pemesanan.";
+                return;
+            }
+            $user_id = $_SESSION['user_id'];
+
             $console_id = $_POST['console_id'];
             $rent_date = $_POST['rent_date'];
             $return_date = $_POST['return_date'];
-            $qty = $_POST['qty'];
+            $qty = (int)$_POST['qty'];
+            $payment_method = $_POST['payment_method'];
 
-            // Ambil user id dari session
-            $user_id = $_SESSION['user']['id'];
-
-            // Ambil data konsol untuk harga
             $console = $this->consoleModel->getById($console_id);
+
+            if (!$console) {
+                echo "Konsol tidak ditemukan!";
+                return;
+            }
+
             $price_per_day = $console['price_per_day'];
 
-            // Hitung jumlah hari sewa
             $days = (strtotime($return_date) - strtotime($rent_date)) / 86400;
-            $days = max(1, $days); // minimal 1 hari
+            $days = max(1, $days);
 
-            // Hitung subtotal dan total
             $subtotal = $price_per_day * $days * $qty;
             $total_price = $subtotal;
 
-            // Insert ke rentals
-            $rental_id = $this->rentalModel->addRental([
+            // Siapkan data untuk processRental
+            $data = [
                 'user_id' => $user_id,
                 'console_id' => $console_id,
                 'rent_date' => $rent_date,
                 'return_date' => $return_date,
-                'total_price' => $total_price,
-                'status' => 'pending'
-            ]);
-
-            // Insert ke rental_details
-            $this->rentalModel->addRentalDetail([
-                'rental_id' => $rental_id,
-                'console_id' => $console_id,
                 'qty' => $qty,
                 'price_per_day' => $price_per_day,
                 'days' => $days,
-                'subtotal' => $subtotal
-            ]);
+                'subtotal' => $subtotal,
+                'total_price' => $total_price,
+                'payment_method' => $payment_method,
+                'status' => 'pending'
+            ];
 
-            // Redirect ke halaman sukses atau daftar rental user
-            header('Location: ' . BASE_URL . '/rental/success');
-            exit;
+            $result = $this->rentalModel->processRental($data);
+
+            if ($result === true) {
+                header('Location: ' . BASE_URL . '/rental/success');
+                exit;
+            } else {
+                // Tampilkan pesan error (bisa juga simpan ke flash message)
+                echo "Gagal melakukan rental. " . (is_string($result) ? $result : "");
+            }
         } else {
             header('Location: ' . BASE_URL . '/rental');
             exit;

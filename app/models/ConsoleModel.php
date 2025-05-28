@@ -6,67 +6,71 @@ class ConsoleModel
 
     public function __construct()
     {
-        // Ganti konfigurasi sesuai database kamu
-
-        $database = new Database();
-        $this->db = $database->getConnection();
+        $this->db = new Database();
     }
 
     public function getAllConsoles()
     {
-        $stmt = $this->db->query("SELECT id, image, name, brand, stock, price_per_day FROM consoles");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->db->query("SELECT id, image, name, brand, stock, price_per_day FROM consoles");
+        return $this->db->resultSet();
     }
 
     public function getTotalKonsol()
     {
-        $stmt = $this->db->query("SELECT COUNT(*) as total FROM consoles");
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $this->db->query("SELECT COUNT(*) as total FROM consoles");
+        $result = $this->db->single();
         return $result ? $result['total'] : 0;
     }
 
     public function getById($id)
     {
-        $stmt = $this->db->prepare("SELECT * FROM consoles WHERE id = ?");
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $this->db->query("SELECT * FROM consoles WHERE id = :id");
+        $this->db->bind('id', $id);
+        return $this->db->single();
     }
 
     public function add($data)
     {
-        $stmt = $this->db->prepare("INSERT INTO consoles (name, brand, description, price_per_day, stock, image) VALUES (?, ?, ?, ?, ?, ?)");
-        return $stmt->execute([
-            $data['name'],
-            $data['brand'],
-            $data['description'],
-            $data['price_per_day'],
-            $data['stock'],
-            $data['image']
-        ]);
+        $this->db->query("INSERT INTO consoles (name, brand, description, price_per_day, stock, image) VALUES (:name, :brand, :description, :price_per_day, :stock, :image)");
+        $this->db->bind('name', $data['name']);
+        $this->db->bind('brand', $data['brand']);
+        $this->db->bind('description', $data['description']);
+        $this->db->bind('price_per_day', $data['price_per_day']);
+        $this->db->bind('stock', $data['stock']);
+        $this->db->bind('image', $data['image']);
+        return $this->db->execute();
     }
 
     public function update($id, $data)
     {
-        $stmt = $this->db->prepare("UPDATE consoles SET name=?, brand=?, description=?, price_per_day=?, image=? WHERE id=?");
-        return $stmt->execute([
-            $data['name'],
-            $data['brand'],
-            $data['description'],
-            $data['price_per_day'],
-            $data['image'],
-            $id
-        ]);
+        $this->db->query("UPDATE consoles SET name=:name, brand=:brand, description=:description, price_per_day=:price_per_day, image=:image WHERE id=:id");
+        $this->db->bind('name', $data['name']);
+        $this->db->bind('brand', $data['brand']);
+        $this->db->bind('description', $data['description']);
+        $this->db->bind('price_per_day', $data['price_per_day']);
+        $this->db->bind('image', $data['image']);
+        $this->db->bind('id', $id);
+        return $this->db->execute();
     }
 
     public function delete($id)
     {
-        $stmt = $this->db->prepare("DELETE FROM consoles WHERE id = ?");
-        return $stmt->execute([$id]);
+        $this->db->query("DELETE FROM consoles WHERE id = :id");
+        $this->db->bind('id', $id);
+        return $this->db->execute();
     }
 
     public function getConsoleCatalog()
     {
-        $stmt = $this->db->query("SELECT id, image, name, stock, price_per_day FROM consoles");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->db->query("SELECT id, image, name, stock, price_per_day FROM consoles");
+        return $this->db->resultSet();
+    }
+
+    public function getStock($id)
+    {
+        $this->db->query("SELECT stock FROM consoles WHERE id = :id");
+        $this->db->bind('id', $id);
+        $result = $this->db->single();
+        return $result ? $result['stock'] : 0;
     }
 }

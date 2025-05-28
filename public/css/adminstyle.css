@@ -1,5 +1,8 @@
 :root {
-  --color-primary: #cdbca8; /* Ganti dengan warna yang kamu inginkan */
+  --background: #EDF4F2;
+  --button: #7C8363;
+  --text: #31473A; 
+  
 }
 
 
@@ -11,7 +14,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 body {
-  background-color: var(--color-primary);
+  background-color: var(--background);
   color: #333;
   display: flex;
   height: 100vh;
@@ -23,7 +26,7 @@ a {
 }
 /* Sidebar */
 .sidebar {
-  background-color: #2f4050;
+  background-color: var(--text);
   color: #fff;
   width: 250px;
   height: 100vh;
@@ -37,22 +40,21 @@ a {
   width: 70px;
 }
 .sidebar-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60px;
-  padding: 0 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 80px;
+  padding: 15px 20px;
   font-size: 1.2rem;
-  background: #af1818;
+  background: #000000;
   color: #fff;
-  font-weight: 600;
-  gap: 10px; /* Jarak antar icon, tulisan, dan hamburger */
+  font-weight: 600; /* Tambahkan jarak antar elemen */
 }
+
 .sidebar-header i,
 .sidebar-header .sidebar-title,
 .sidebar-header .menu-toggle {
   margin: 0; /* Hapus margin default */
-  padding: 0;
+  padding: 1px 2px; /* Tambahkan padding untuk jarak antar elemen */
 }
 .menu-toggle {
   background: none;
@@ -66,7 +68,6 @@ a {
 }
 .sidebar-menu {
   flex-grow: 1;
-  padding-top: 10px;
   display: flex;
   flex-direction: column;
 }
@@ -80,8 +81,8 @@ a {
 }
 .sidebar-menu a:hover,
 .sidebar-menu a.active {
-  background-color: #1ab394;
-  color: #fff;
+  background-color: var(--button);
+  color: #000000;
 }
 .sidebar-menu a i {
   margin-right: 12px;
@@ -121,7 +122,7 @@ a {
   justify-content: space-between;
   height: 60px;           /* Samakan dengan sidebar-header */
   padding: 0 20px;        /* Samakan padding */
-  background: #ffffff;    /* Samakan warna */
+  background: var(--text);    /* Samakan warna */
   color: #fff;
   font-size: 1.2rem;
   font-weight: 600;
@@ -131,7 +132,7 @@ a {
 .menu-toggle {
   font-size: 1.5rem;
   cursor: pointer;
-  color: #2f4050;
+  color: var(--button);
 }
 .topbar-right {
   display: flex;
@@ -169,7 +170,7 @@ h1 {
   font-size: 2rem;
   margin-top: 20px;
   margin-bottom: 20px;
-  color: #2f4050;
+  color: var(--text);
   user-select: none;
 }
 /* Cards container */
@@ -180,7 +181,7 @@ h1 {
   margin-bottom: 30px;
 }
 .card {
-  background: white;
+  background: var(--text);
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 1px 6px rgb(0 0 0 / 0.1);
@@ -191,7 +192,7 @@ h1 {
   cursor: default;
 }
 .card:hover {
-  box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
+  box-shadow: 0 6px 20px rgba(68, 67, 67, 0.15);
 }
 .card .info {
   display: flex;
@@ -201,17 +202,17 @@ h1 {
 .card .info .title {
   font-weight: 600;
   font-size: 1rem;
-  color: #666;
+  color: #000000;
   margin-bottom: 5px;
 }
 .card .info .value {
   font-size: 1.7rem;
   font-weight: 700;
-  color: #1ab394;
+  color: var(--background);
 }
 .card .icon {
   font-size: 2.8rem;
-  color: #1ab394;
+  color: var(--button);
   opacity: 0.7;
 }
 /* Table styles */
@@ -228,13 +229,17 @@ table {
   user-select: none;
 }
 thead {
-  background: #1ab394;
+  background: var(--text);
   color: white;
 }
 th, td {
   text-align: left;
   padding: 14px 12px;
   border-bottom: 1px solid #e6e9f0;
+}
+
+td {
+  background-color: var(--button);
 }
 tbody tr:hover {
   background-color: #f1f9f7;
@@ -260,12 +265,12 @@ tbody tr:hover {
   }
 
   .tab:hover {
-    color: #3f51b5;
+    color: #000000;
   }
 
   .tab.active {
-    color: #3f51b5;
-    border-bottom-color: #3f51b5;
+    color: var(--button);
+    border-bottom-color: var(--button);
   }
 
   /* Table styles */
@@ -283,7 +288,7 @@ tbody tr:hover {
   }
 
   th {
-    background-color: #3f51b5;
+    background-color: var(--text);
     color: white;
     font-weight: 600;
   }
@@ -294,31 +299,34 @@ tbody tr:hover {
 
   /* Buttons */
   button {
-    background-color: #3f51b5;
+    background-color: var(--button);
     color: white;
     border: none;
-    border-radius: 6px;
-    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    padding: 5px 10px;
     cursor: pointer;
     font-weight: 600;
     transition: background-color 0.3s ease;
   }
 
-  button:hover:not(:disabled) {
-    background-color: #303f9f;
+  button:hover {
+    background-color: #585d47;
   }
 
-  button:disabled {
-    background-color: #999;
-    cursor: not-allowed;
+  .btn-delete {
+    background-color: #ff0400;
   }
 
-  .btn-danger {
-    background-color: #e53935;
-  }
-
-  .btn-danger:hover {
+  .btn-delete:hover {
     background-color: #b71c1c;
+  }
+
+  .btn-edit {
+    background-color: #000000;
+  }
+
+  .btn-edit:hover {
+    background-color: #585d47;
   }
 
   /* Forms */
@@ -748,7 +756,7 @@ tbody tr:hover {
   tbody td {
     padding: 0.75rem 1rem;
     font-size: 0.9rem;
-    color: #555;
+    color: #000000;
   }
 
   .actions button {
@@ -795,7 +803,7 @@ tbody tr:hover {
   }
 
     .btn-hapus-user {
-    background: #e74c3c;
+    background: #ff0000;
     color: #fff;
     padding: 5px 10px;
     border-radius: 4px;

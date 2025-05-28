@@ -77,52 +77,29 @@
 
         <section class="testimonials-section">
             <h2 class="testimonials-title">Apa Kata Mereka</h2>
-
             <div class="testimonials-container">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card">
-                    <span class="quote-icon">“</span>
-                    <div class="user-info">
-                        <img src="https://via.placeholder.com/60" alt="User" class="user-img">
-                        <div>
-                            <div class="user-name">John Smith</div>
-                            <div class="user-role">Marketing Manager</div>
+                <?php if (!empty($reviews)): ?>
+                    <?php foreach ($reviews as $review): ?>
+                        <div class="testimonial-card">
+                            <span class="quote-icon">“</span>
+                            <div class="user-info" style="margin-bottom: 0.5rem;">
+                                <div class="user-name" style="font-weight:700;">
+                                    <?= htmlspecialchars($review['user_name']) ?>
+                                </div>
+                                <div class="user-role" style="color:#f9b700;">
+                                    <?php for ($i = 0; $i < $review['rating']; $i++): ?>
+                                        ⭐
+                                    <?php endfor; ?>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">
+                                <?= htmlspecialchars($review['comment']) ?>
+                            </p>
                         </div>
-                    </div>
-                    <p class="testimonial-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                    </p>
-                </div>
-
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card">
-                    <span class="quote-icon">“</span>
-                    <div class="user-info">
-                        <img src="https://via.placeholder.com/60" alt="User" class="user-img">
-                        <div>
-                            <div class="user-name">Sarah Johnson</div>
-                            <div class="user-role">Small Business Owner</div>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-                    </p>
-                </div>
-
-                <!-- Testimonial 3 -->
-                <div class="testimonial-card">
-                    <span class="quote-icon">“</span>
-                    <div class="user-info">
-                        <img src="https://via.placeholder.com/60" alt="User" class="user-img">
-                        <div>
-                            <div class="user-name">Michael Chen</div>
-                            <div class="user-role">Startup Founder</div>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">
-                        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-                    </p>
-                </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div style="padding:2rem; text-align:center;">Belum ada review dari user.</div>
+                <?php endif; ?>
             </div>
         </section>
     </div>
