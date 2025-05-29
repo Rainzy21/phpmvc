@@ -947,6 +947,15 @@
     background: #219150;
 }
 
+.team-member img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 1rem auto;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     .catalog-products {

@@ -20,10 +20,8 @@
             <div class="footer-section">
                 <h4>Ikuti Kami</h4>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/28_informatics?igsh=OWlncmF1aWI1ZWlh" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/Rainzy21" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </div>

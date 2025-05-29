@@ -12,7 +12,7 @@ $current = $_SERVER['REQUEST_URI'];
 </head>
 <body>
     <header>
-     <nav>
+    <nav>
         <div class="nav-container">
             <ul class="nav-links">
                 <li><a href="<?= BASE_URL; ?>/Home" class="<?= ($data['active_menu'] ?? '') === 'home' ? 'active' : '' ?>">Beranda</a></li>
