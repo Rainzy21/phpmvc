@@ -5,9 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= $data['title']; ?></title>
   <style>
+            :root{
+                --primary-color: #023047;
+                --secondary-color: #229ebc;
+                --text-color: #ffffff;
+                --skin-color: #8ecae6;
+                --third-color: #ffb703; 
+                --fourth-color: #fb8500;
+            }
+            
             body {
                 font-family: Arial, sans-serif;
-                background-color: #f3ca20;
+                background-color: var(--primary-color);
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -16,16 +25,16 @@
             }
 
             .login-container {
-                background-color: #000000;
+                background-color: var(--primary-color);
                 padding: 30px;
                 border-radius: 8px;
-                box-shadow: 0 2px 100px rgb(255, 137, 10);
+                box-shadow: 0 2px 100px #8ecae6;
                 width: 350px;
             }
 
             h2 {
                 text-align: center;
-                color: #f3ca20;
+                color: var(--secondary-color);
                 margin-bottom: 30px;
             }
 
@@ -51,7 +60,7 @@
 
             input[type="text"]:focus,
             input[type="password"]:focus {
-                border-color: #f3ca20;
+                border-color: var(--secondary-color);
                 outline: none;
                 color: #ffffff;
             }
@@ -59,7 +68,7 @@
             button {
                 width: 100%;
                 padding: 12px;
-                background-color: #f3ca20;
+                background-color: var(--secondary-color);
                 color: white;
                 border: none;
                 border-radius: 4px;
@@ -68,7 +77,7 @@
             }
 
             button:hover {
-                background-color: #947a14;
+                background-color: var(--skin-color);
             }
 
             .forgot-password {
@@ -97,7 +106,7 @@
             }
 
             .register-link a {
-                color: #f3ca20;
+                color: var(--secondary-color);
                 text-decoration: none;
                 font-size: 14px;
             }

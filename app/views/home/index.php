@@ -1,7 +1,7 @@
 <main>
     <div class="container">
         <section class="hero">
-            <h1>Sewa Konsol Game<br><span style="color: var(--primary)">Premium</span></h1>
+            <h1 style="color: var(--primary)">Sewa Konsol Game<br><span style="color: var(--primary)">Premium</span></h1>
             <p class="tagline">PS5, Xbox Series X, Nintendo Switch - Pilihan lengkap dengan kualitas terbaik</p>
             <a href="<?= BASE_URL; ?>/Catalog" class="cta-button">Jelajahi Katalog</a>
         </section>
