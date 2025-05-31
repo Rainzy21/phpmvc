@@ -1,18 +1,18 @@
 <section class="team-section" style="padding: 4rem 0; background: #f8f9fa;">
     <div class="container" style="max-width: 1100px; margin: 0 auto;">
-        <h2 style="text-align:center; font-size:2.5rem; margin-bottom:2rem; color:#2c3e50;">Our Team</h2>
+        <h2 style="text-align:center; font-size:2.5rem; margin-bottom:2rem; color: var(--primary);"> Our Team </h2>
         <div class="team-grid" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
             <!-- Team Member 1 -->
-            <div class="team-member" style="background: #fff; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); padding: 2rem 1.5rem; text-align: center; width: 270px;">
+            <div class="team-member" style="background: var(--primary); border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); padding: 2rem 1.5rem; text-align: center; width: 270px;">
                 <img src="<?= PUBLIC_URL; ?>/public/img/LS.JPG" alt="PACE" style="width:100px; height:100px; border-radius:50%; object-fit:cover; margin-bottom:1rem;">
-                <h3 style="margin-bottom:0.3rem;">Rivoldy Makatita</h3>
+                <h3 style="margin-bottom:0.3rem; color: #f3ca20;">Rivoldy Makatita</h3>
                 <p style="color:#636e72; font-size:1rem; margin-bottom:0.5rem;">Leader Team</p>
-                <p style="font-size:0.97rem;">Mengembangkan sistem dan memastikan aplikasi berjalan optimal setiap saat.</p>
+                <p style="font-size:0.97rem; color: var(--);">Mengembangkan sistem dan memastikan aplikasi berjalan optimal setiap saat.</p>
             </div>
-            <!-- Team Member 2 -->
+            <!-- Team Member 2 --> 
             <div class="team-member" style="background: #fff; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); padding: 2rem 1.5rem; text-align: center; width: 270px;">
                 <img src="<?= PUBLIC_URL; ?>/public/img/team2.jpg" alt="Rifqi" style="width:100px; height:100px; border-radius:50%; object-fit:cover; margin-bottom:1rem;">
-                <h3 style="margin-bottom:0.3rem;">Muhammad Rifqi Ihsan</h3>
+                <h3 style="margin-bottom:0.3rem; color: #f3ca20;">Muhammad Rifqi Ihsan</h3>
                 <p style="color:#636e72; font-size:1rem; margin-bottom:0.5rem;">UI/UX Designer</p>
                 <p style="font-size:0.97rem;">Mendesain tampilan dan pengalaman pengguna yang menarik dan mudah digunakan.</p>
             </div>
