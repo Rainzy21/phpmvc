@@ -512,7 +512,7 @@
 
         .advantage-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px #CA7842;
         }
 
         .advantage-icon {
@@ -715,7 +715,7 @@
 
 .carasewa-container header p {
     font-size: 1.2rem;
-    color: #333;
+    color: #666;
     line-height: 1.4;
 }
 
@@ -731,7 +731,7 @@
 }
 
 .carasewa-container ol li {
-    background: rgba(255, 255, 255, 0.17);
+    background: #ffffff2b;
     border-radius: 14px;
     padding: 2rem 1.5rem 2rem 1.5rem;
     position: relative;
@@ -759,7 +759,7 @@
     width: 40px;
     line-height: 40px;
     border-radius: 50%;
-    color: white;
+    color: var(--primary);
     font-weight: 700;
     font-size: 1.5rem;
     text-align: center;
@@ -771,7 +771,7 @@
     margin-bottom: 1rem;
     font-weight: 600;
     font-size: 1.25rem;
-    color: #21c7ff;
+    color: var(--light);
 }
 
 .carasewa-container ol li p {

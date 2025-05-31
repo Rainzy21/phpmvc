@@ -1,7 +1,7 @@
 <div class="carasewa-container" role="main" aria-label="Panduan Cara Sewa Perangkat Konsol">
   <header>
-    <h1>Cara Sewa Perangkat Konsol</h1>
-    <p>Panduan praktis untuk menyewa konsol game favorit Anda dengan mudah dan cepat.</p>
+    <h1 style="color: var(--primary);">Cara Sewa Perangkat Konsol</h1>
+    <p style="color: #666;">Panduan praktis untuk menyewa konsol game favorit Anda dengan mudah dan cepat.</p>
   </header>
   <ol>
     <li>
