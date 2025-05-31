@@ -9,7 +9,7 @@
     body {
         margin: 0;
         font-family: 'Montserrat', sans-serif;
-        background: linear-gradient(135deg, #667eea, #764ba2);
+        background: linear-gradient(135deg, #229ebc, #023047);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -17,10 +17,10 @@
         color: #fff;
     }
     .container {
-        background: rgba(255,255,255,0.1);
+        background: #023047;
         padding: 2rem 3rem;
         border-radius: 16px;
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        box-shadow: 0 8px 32px 0 #dadada;
         max-width: 400px;
         width: 100%;
         text-align: center;
@@ -45,7 +45,7 @@
         border-radius: 8px;
         border: none;
         font-size: 1rem;
-        color: #333;
+        color: #000;    
         appearance: none;
         background: #f0f0f0;
         margin-bottom: 1.5rem;
@@ -55,13 +55,13 @@
     }
     select:focus, input[type="date"]:focus, input[type="number"]:focus {
         outline: none;
-        box-shadow: 0 0 8px #a29bfe;
+        box-shadow: 0 0 8px #229ebc;
     }
     input[type="number"] {
         cursor: text;
     }
     button {
-        background: #6c5ce7;
+        background: #229ebc;
         border: none;
         padding: 0.75rem 2rem;
         border-radius: 50px;
@@ -74,7 +74,7 @@
         margin-top: 1rem;
     }
     button:hover {
-        background: #5848c2;
+        background: #8ecae6;
     }
     .error-message {
         color: #ff7675;
