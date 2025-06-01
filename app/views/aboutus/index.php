@@ -25,7 +25,7 @@
             </div>
             <!-- Team Member 4 -->
             <div class="team-member" style="background: var(--primary); border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); padding: 2rem 1.5rem; text-align: center; width: 270px;">
-                <img src="<?= PUBLIC_URL; ?>/public/img/team4.jpg" alt="Patur" style="width:100px; height:100px; border-radius:50%; object-fit:cover; margin-bottom:1rem;">
+                <img src="<?= PUBLIC_URL; ?>/public/img/patur.jpg" alt="Patur" style="width:100px; height:100px; border-radius:50%; object-fit:cover; margin-bottom:1rem;">
                 <h3 style="margin-bottom:0.3rem; color: #f3ca20; ">Andi Fathur Rahman Ismail</h3>
                 <p style="color: var(--light); font-size:1rem; margin-bottom:0.5rem;">Customer Support</p>
                 <p style="font-size:0.97rem;">Memberikan layanan dan solusi terbaik untuk setiap kebutuhan pelanggan.</p>

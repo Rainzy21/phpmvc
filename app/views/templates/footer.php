@@ -3,9 +3,9 @@
             <div class="footer-section">
                 <h4>Kontak</h4>
                 <ul class="footer-links">
-                    <li><a href="tel:+62123456789">+62 123 4567 89</a></li>
-                    <li><a href="mailto:info@example.com">info@example.com</a></li>
-                    <li><a href="#">Jl. Contoh Alamat No. 123, Jakarta</a></li>
+                    <li><a href="tel:+62123456789">+628-1343-4085-42</a></li>
+                    <li><a href="mailto:info@example.com">fashahervino@gmail.com</a></li>
+                    <li><a href="#">Jl. Juanda</a></li>
                 </ul>
             </div>
             
