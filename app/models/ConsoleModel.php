@@ -55,6 +55,22 @@ class ConsoleModel
 
     public function delete($id)
     {
+        // Hapus data terkait di rental_details
+        $this->db->query("DELETE FROM rental_details WHERE console_id = :id");
+        $this->db->bind('id', $id);
+        $this->db->execute();
+
+        // Hapus data terkait di reviews
+        $this->db->query("DELETE FROM reviews WHERE console_id = :id");
+        $this->db->bind('id', $id);
+        $this->db->execute();
+
+        // Hapus data terkait di rentals
+        $this->db->query("DELETE FROM rentals WHERE console_id = :id");
+        $this->db->bind('id', $id);
+        $this->db->execute();
+
+        // Baru hapus data di consoles
         $this->db->query("DELETE FROM consoles WHERE id = :id");
         $this->db->bind('id', $id);
         return $this->db->execute();

@@ -1,3 +1,5 @@
+<?php
+?>
 <div class="container-orders">
     <?php if (!empty($orders)): ?>
         <?php foreach ($orders as $order): ?>
@@ -5,14 +7,26 @@
                 <div class="order-header">
                     ID Pesanan: #<span class="order-id"><?= htmlspecialchars($order['id']) ?></span>
                 </div>
-                <div class="order-item">
-                    <div class="order-label">Nama Konsol</div>
-                    <div class="order-value"><?= htmlspecialchars($order['console_name']) ?></div>
-                </div>
-                <div class="order-item">
-                    <div class="order-label">Jumlah Unit</div>
-                    <div class="order-value"><?= htmlspecialchars($order['qty']) ?></div>
-                </div>
+                <?php if (!empty($order['details'])): ?>
+                    <?php foreach ($order['details'] as $detail): ?>
+                        <div class="order-item">
+                            <div class="order-label">Nama Konsol</div>
+                            <div class="order-value"><?= htmlspecialchars($detail['console_name']) ?></div>
+                        </div>
+                        <div class="order-item">
+                            <div class="order-label">Jumlah Unit</div>
+                            <div class="order-value"><?= htmlspecialchars($detail['qty']) ?></div>
+                        </div>
+                        <?php if ($order['status'] === 'completed'): ?>
+                             <div class="order-item">
+                                <a class="btn-review"
+                                   href="<?= BASE_URL; ?>/reviews/add?rental_id=<?= $order['id'] ?>&console_id=<?= $detail['console_id'] ?>">
+                                    Beri Review
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
                 <div class="order-item">
                     <div class="order-label">Tanggal Sewa</div>
                     <div class="order-value">
@@ -21,9 +35,9 @@
                 </div>
                 <div class="order-item">
                     <div class="order-label">Status Pesanan</div>
-                    <div class="order-value" id="order-status-123" data-status="ongoing">
+                    <div class="order-value" id="order-status-<?= $order['id'] ?>" data-status="<?= htmlspecialchars($order['status']) ?>">
                         <span class="status-icon"></span>
-                        <span class="status-text"></span>
+                        <span class="status-text"><?= htmlspecialchars($order['status']) ?></span>
                     </div>
                 </div>
                 <div class="order-item" id="notes-section-<?= $order['id'] ?>" style="display:none;">

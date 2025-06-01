@@ -1,4 +1,7 @@
 <?php
+// Pastikan require_once sudah ada
+require_once __DIR__ . '/../../models/RentalModel.php';
+
 // Ini untuk controller admin dashboard
 class Transactions extends Controller
 {

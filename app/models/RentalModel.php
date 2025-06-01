@@ -179,23 +179,23 @@ class RentalModel
         return $this->db->execute();
     }
 
-    public function getOrdersByUser($user_id)
+    public function getOrdersByUser($userId)
     {
         $this->db->query("
             SELECT 
-                rentals.id,
-                consoles.name AS console_name,
-                rental_details.qty,
-                rentals.rent_date,
-                rentals.return_date,
+                rentals.id, 
+                rentals.console_id,           -- tambahkan ini!
+                consoles.name AS console_name, 
+                rental_details.qty, 
+                rentals.rent_date, 
+                rentals.return_date, 
                 rentals.status
             FROM rentals
+            JOIN consoles ON rentals.console_id = consoles.id
             JOIN rental_details ON rental_details.rental_id = rentals.id
-            JOIN consoles ON consoles.id = rental_details.console_id
             WHERE rentals.user_id = :user_id
-            ORDER BY rentals.created_at DESC
         ");
-        $this->db->bind('user_id', $user_id);
+        $this->db->bind('user_id', $userId);
         return $this->db->resultSet();
     }
 }

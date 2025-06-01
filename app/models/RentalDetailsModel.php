@@ -26,7 +26,10 @@ Class RentalDetailsModel
 
     public function getRentalDetailsByRentalId($rentalId)
     {
-        $query = "SELECT * FROM rental_details WHERE rental_id = :rental_id";
+        $query = "SELECT rental_details.*, consoles.name AS console_name
+                  FROM rental_details
+                  JOIN consoles ON rental_details.console_id = consoles.id
+                  WHERE rental_details.rental_id = :rental_id";
         $this->db->query($query);
         $this->db->bind('rental_id', $rentalId);
         return $this->db->resultSet();
